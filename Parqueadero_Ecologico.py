@@ -87,3 +87,55 @@ def liberar_ubicacion(verificacion):
             print(f"La ubicación {ubicacion} ha sido liberada para el vehículo")
             break
             time.sleep(2)        
+            
+    #Ejecucion Inicial
+while True:
+    oled.fill(0)                              # Indica en la pantalla oled el nombre del parqueadero y la disponibilidad de este
+    oled.text("*************",10,0)
+    oled.text("Paqueadero",20,10)
+    oled.text("Ecologico",25,20)        
+    oled.text("*************",10,30)
+    oled.text("Disponibles",20,40)
+    oled.text(str(disponibilidad),57,50)
+    oled.show()
+    #print(espacios)                          #Impresion de prueba diccionario
+    #print(disponibilidad)                    #Impresion de prueba variable
+    
+    if entradap.value() == 0:    # Sensor infrarojo de entrada si detecta objeto
+        oled.fill(0) 
+        oled.text("*************",10,0)
+        oled.text("Ingresando",20,20)
+        oled.text("Vehiculo",30,30)            
+        oled.text("*************",10,50)
+        oled.show()
+        print("Movimiento detectado Entrada")
+        verificacion=randrange(1,10)
+        asignar_ubicacion(verificacion)
+        time.sleep(5)
+            
+    elif salidap.value() == 0:    # Sensor infrarojo de salida si detecta objeto   
+        oled.fill(0) 
+        oled.text("*************",10,0)
+        oled.text("Saliendo",30,20)
+        oled.text("Vehiculo",30,30)            
+        oled.text("*************",10,50)
+        oled.show()          
+        print("Movimiento detectado Salida")
+        if disponibilidad<10:  # Si se encuentra ocupadas todas las ubicaciones del parqueadero ejecuta la funcion liberar ubicacion 
+            liberar_ubicacion(verificacion)
+        else:                  # Si se encuentran disponibles todas las ubicaciones y se activa el sensor de salida,
+                               #este indicara indica que no se encuntran vehiculos en el parqueadero y no ejecutara accion en el sevomotor            
+            print("Parqueadero vacio")
+            oled.fill(0) 
+            oled.text("*************",10,0)
+            oled.text("Parqueadero",20,20)
+            oled.text("Vacio",40,30)            
+            oled.text("*************",10,50)
+            oled.show()
+        time.sleep(5)
+                  
+    else:
+        print("Sin movimiento")    
+        m = map(90)  #grados del servomotor (cerrado)
+        servo.duty(m)
+        time.sleep(1)
