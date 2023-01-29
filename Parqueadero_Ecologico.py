@@ -124,7 +124,7 @@ while True:
         if disponibilidad<10:  # Si se encuentra ocupadas todas las ubicaciones del parqueadero ejecuta la funcion liberar ubicacion 
             liberar_ubicacion(verificacion)
         else:                  # Si se encuentran disponibles todas las ubicaciones y se activa el sensor de salida,
-                               #este indicara indica que no se encuntran vehiculos en el parqueadero y no ejecutara accion en el sevomotor            
+                               # Este indicara indica que no se encuntran vehiculos en el parqueadero y no ejecutara accion en el sevomotor            
             print("Parqueadero vacio")
             oled.fill(0) 
             oled.text("*************",10,0)
@@ -136,6 +136,6 @@ while True:
                   
     else:
         print("Sin movimiento")    
-        m = map(90)  #grados del servomotor (cerrado)
+        m = map(90)  #Grados del servomotor (cerrado)
         servo.duty(m)
         time.sleep(1)
