@@ -84,7 +84,7 @@ def liberar_ubicacion(verificacion):
             espacios[ubicacion] = True              # Realiza el cambio de estado False a True de la ubicacion seleccionada
             m = map(0)                              # Grados del servomotor (abierto)
             servo.duty(m)
-            print(f"La ubicación {ubicacion} ha sido liberada para el vehículo")
+            print(f"La ubicación {ubicacion} ha sido liberada")
             break
             time.sleep(2)        
             
@@ -138,4 +138,4 @@ while True:
         print("Sin movimiento")    
         m = map(90)  #Grados del servomotor (cerrado)
         servo.duty(m)
-        time.sleep(1)
+        time.sleep(1)    
